@@ -41,7 +41,7 @@ function createFetchFunction (component, originalFetch, actions) {
     let target = {}
     Object.assign(target, bindContext(mapActions(component.actions), context))
     if (originalFetch) {
-      await originalFetch(target, [context])
+      await originalFetch.apply(target, [context])
     }
   }
 }
