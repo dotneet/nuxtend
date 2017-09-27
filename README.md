@@ -1,6 +1,6 @@
-It's a black magic library for Nuxt.js
+This library makes Nuxt.js possible to use mixin for asyncData()/fetch() and provide some helpful features.
 
-## mixin works
+## Mixin
 
 ```js
 import nuxtend from 'nuxtend'
@@ -20,7 +20,10 @@ export default nuxtend({
 })
 ```
 
-## calling a vuex action via this.
+## Vuex action helper
+
+Using `actions` property, you can call a vuex action in same syntax anywhere. 
+Of course 'actions' property is supported by mixin.
 
 ```js
 import nuxtend from 'nuxtend'
@@ -44,7 +47,6 @@ export default nuxtend({
     }
   },
   mounted () {
-    // same syntax with asyncData()
     this.findBooks()
   }
 })
