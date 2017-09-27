@@ -1,0 +1,22 @@
+{
+  "name": "nuxtend",
+  "version": "0.0.1",
+  "description": "It's a black magick library for Nuxt.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel src --source-maps --out-dir dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shinji Yamada <dotneet@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.7.2"
+  }
+}
