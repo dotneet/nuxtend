@@ -2,6 +2,7 @@ It's a black magic library for Nuxt.js
 
 ## mixin works
 
+```js
 import nuxtend from 'nuxtend'
 
 const m = {
@@ -17,9 +18,11 @@ export default nuxtend({
     return {}
   }
 })
+```
 
 ## calling a vuex action via this.
 
+```js
 import nuxtend from 'nuxtend'
 
 const m = {
@@ -45,4 +48,5 @@ export default nuxtend({
     this.findBooks()
   }
 })
+```
 
