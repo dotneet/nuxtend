@@ -1,6 +1,6 @@
-import { mapActions } from 'vuex'
+import {mapActions} from 'vuex'
 
-function bindContext (actions, context) {
+function bindContext(actions, context) {
   const target = {'$store': context.store}
   const result = {}
   for (let key in actions) {
@@ -10,7 +10,7 @@ function bindContext (actions, context) {
   return result
 }
 
-function createAsyncDataFunction (component, originalAsyncData) {
+function createAsyncDataFunction(component, originalAsyncData) {
   return async (context) => {
     let data = {}
     for (let idx in component.mixins) {
@@ -30,7 +30,7 @@ function createAsyncDataFunction (component, originalAsyncData) {
   }
 }
 
-function createFetchFunction (component, originalFetch, actions) {
+function createFetchFunction(component, originalFetch) {
   return async (context) => {
     for (let idx in component.mixins) {
       let mixin = component.mixins[idx]
@@ -46,7 +46,7 @@ function createFetchFunction (component, originalFetch, actions) {
   }
 }
 
-function mergeActions (component) {
+function mergeActions(component) {
   let actions = {}
   if (component.mixins) {
     component.mixins.forEach(mixin => {
@@ -64,17 +64,9 @@ function mergeActions (component) {
 export default function (component) {
   let com = Object.assign(component)
   let {asyncData, fetch} = com
-  delete com.asyncData
-  delete com.fetch
-  let actions = {}
-  if (com.actions) {
-    actions = mapActions(component.actions)
-    component.methods = {...actions, ...component.methods}
-  }
   com.actions = mergeActions(com)
   com.methods = {...mapActions(com.actions), ...component.methods}
   com.fetch = createFetchFunction(com, fetch)
   com.asyncData = createAsyncDataFunction(com, asyncData)
-  console.log(com)
   return com
 }
