@@ -1,5 +1,11 @@
 This library makes Nuxt.js possible to use mixin for asyncData()/fetch() and provide some helpful features.
 
+## Install
+
+```bash
+npm i nuxtend
+```
+
 ## Mixin
 
 ```js
