@@ -1,6 +1,6 @@
 {
   "name": "nuxtend",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "It's a black magick library for Nuxt.js",
   "main": "dist/index.js",
   "scripts": {
