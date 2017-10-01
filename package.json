@@ -1,7 +1,7 @@
 {
   "name": "nuxtend",
-  "version": "0.0.6",
-  "description": "It's a black magick library for Nuxt.js",
+  "version": "0.1.0",
+  "description": "This is Nuxt.js library that provides mixin for asyncData()/fetch() and some helpful features.",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src --source-maps --out-dir dist",

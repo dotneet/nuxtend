@@ -26,24 +26,22 @@ export default nuxtend({
 })
 ```
 
-## Vuex action helper
+## methods can be used on asyncData/fetch via `this`.
 
-Using `actions` property, you can call a vuex action in same syntax anywhere. 
-Of course 'actions' property is supported by mixin.
+This feature enables you to call a vuex action in same syntax anywhere. 
+Of course you can call non vuex action methods also.
 
 ```js
 import nuxtend from 'nuxtend'
+import {mapActions} from 'vuex'
 
 const m = {
-  actions: {
-    'findBooks': 'books/find'
+  methods: {
+    ...mapActions({'findBooks': 'books/find'})
   }
 }
 
 export default nuxtend({
-  actions: {
-    'findAudios': 'audios/find'
-  },
   async asyncData (context) {
     const books = await this.findBooks()
     const audios = await this.findAudios()
@@ -54,6 +52,11 @@ export default nuxtend({
   },
   mounted () {
     this.findBooks()
+  },
+  methods: {
+    ...mapActions({
+      'findAudios': 'audios/find'
+    })
   }
 })
 ```
