@@ -35,13 +35,14 @@ Of course you can call non vuex action methods also.
 import nuxtend from 'nuxtend'
 import {mapActions} from 'vuex'
 
-const m = {
+const mixinA = {
   methods: {
     ...mapActions({'findBooks': 'books/find'})
   }
 }
 
 export default nuxtend({
+  mixins: [mixinA],
   async asyncData (context) {
     const books = await this.findBooks()
     const audios = await this.findAudios()
