@@ -1,5 +1,4 @@
-
-function bindContext(methods, context) {
+function bindContext (methods, context) {
   const target = {'$store': context.store}
   const result = {}
   for (let key in methods) {
@@ -8,7 +7,7 @@ function bindContext(methods, context) {
   return result
 }
 
-function createAsyncDataFunction(component, originalAsyncData, methods) {
+function createAsyncDataFunction (component, originalAsyncData, methods) {
   return async (context) => {
     let data = {}
     for (let idx in component.mixins) {
@@ -26,7 +25,7 @@ function createAsyncDataFunction(component, originalAsyncData, methods) {
   }
 }
 
-function createFetchFunction(component, originalFetch, methods) {
+function createFetchFunction (component, originalFetch, methods) {
   return async (context) => {
     for (let idx in component.mixins) {
       let mixin = component.mixins[idx]
