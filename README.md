@@ -62,3 +62,25 @@ export default nuxtend({
 })
 ```
 
+## Abstraction of calling api and actions. (since 0.2.0)
+
+export default nuxnted({
+  nuxtend: {
+    actions: ['apple']
+  },
+  async asyncData () {
+    // if 'apples/get' action is defined call it, if not call $axios.get('/apples/10')
+    this.getApple(10)
+    // and also below functions can be used as well.
+    // - action: 'apples/getList'  api: this.$axios.get('/apples', {params: {status: 'dropped'}})
+    // this.getAppleList({status: 'dropped'})
+    // - action: 'apples/create'  api: this.$axios.post('/apples', {status: 'dropped'})
+    // this.postApple({status: 'dropped'})
+    // - action: 'apples/update'  api: this.$axios.put('/apples', {status: 'dropped'})
+    // this.putApple({status: 'dropped'})
+    // - action: 'apples/delete'  api: this.$axios.delete('/apples/10')
+    // this.putApple(10)
+  }
+})
+
+

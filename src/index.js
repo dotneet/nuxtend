@@ -1,5 +1,7 @@
+const genActions = require('./genactions')
+
 function bindContext (methods, context) {
-  const target = {'$store': context.store}
+  const target = {'$store': context.store, '$axios': context.$axios}
   const result = {}
   for (let key in methods) {
     result[key] = methods[key].bind(target)
@@ -51,10 +53,20 @@ function mergeMethods (component) {
   if (component.methods) {
     Object.assign(methods, component.methods)
   }
+  if (component.nuxtend && component.nuxtend.actions) {
+    for (let act of component.nuxtend.actions) {
+      const funcs = genActions({}, act)
+      for (let name in funcs) {
+        if (typeof methods[name] === 'undefined') {
+          methods[name] = funcs[name]
+        }
+      }
+    }
+  }
   return methods
 }
 
-export default function (component) {
+module.exports = function (component) {
   let com = Object.assign(component)
   let {asyncData, fetch} = com
   const methods = mergeMethods(com)
@@ -64,5 +76,7 @@ export default function (component) {
   if (asyncData) {
     com.asyncData = createAsyncDataFunction(com, asyncData, methods)
   }
+  com.methods = methods
   return com
 }
+
