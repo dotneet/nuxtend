@@ -64,6 +64,7 @@ export default nuxtend({
 
 ## Abstraction of calling api and actions. (since 0.2.0)
 
+```js
 export default nuxnted({
   nuxtend: {
     actions: ['apple']
@@ -82,5 +83,6 @@ export default nuxnted({
     // this.putApple(10)
   }
 })
+```
 
 
