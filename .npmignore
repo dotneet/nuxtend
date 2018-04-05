@@ -8,3 +8,4 @@ scripts
 .git
 tmp
 package-lock.json
+yarn.lock
