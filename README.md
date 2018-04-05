@@ -71,16 +71,19 @@ export default nuxnted({
   },
   async asyncData () {
     // if 'apples/get' action is defined call it, if not call $axios.get('/apples/10')
-    this.getApple(10)
+    const res = await this.getApple(10)
     // and also below functions can be used as well.
     // - action: 'apples/getList'  api: this.$axios.get('/apples', {params: {status: 'dropped'}})
     // this.getAppleList({status: 'dropped'})
     // - action: 'apples/create'  api: this.$axios.post('/apples', {status: 'dropped'})
     // this.postApple({status: 'dropped'})
-    // - action: 'apples/update'  api: this.$axios.put('/apples', {status: 'dropped'})
-    // this.putApple({status: 'dropped'})
+    // - action: 'apples/update'  api: this.$axios.put('/apples/10', {status: 'dropped'})
+    // this.putApple({id: 10, params: {status: 'dropped'}})
     // - action: 'apples/delete'  api: this.$axios.delete('/apples/10')
-    // this.putApple(10)
+    // this.deleteApple(10)
+    return {
+      apple: res.data
+    }
   }
 })
 ```
