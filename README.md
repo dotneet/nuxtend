@@ -67,7 +67,7 @@ export default nuxtend({
 ```js
 export default nuxnted({
   nuxtend: {
-    actions: ['apple']
+    actions: ['apple', 'me/banana']
   },
   async asyncData () {
     // if 'apples/get' action is defined call it, if not call $axios.get('/apples/10')
@@ -81,6 +81,10 @@ export default nuxnted({
     // this.putApple({id: 10, params: {status: 'dropped'}})
     // - action: 'apples/delete'  api: this.$axios.delete('/apples/10')
     // this.deleteApple(10)
+
+    // - action: 'me/bananas/get' api: this.$axios.get('/me/bananas/10')
+    // this.getBanaa(1)
+
     return {
       apple: res.data
     }
