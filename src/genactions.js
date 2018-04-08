@@ -97,7 +97,5 @@ module.exports = function (context, actionObj) {
     }
   }
 
-  console.log(Object.keys(funcs))
-
   return funcs
 }
