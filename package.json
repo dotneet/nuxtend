@@ -1,6 +1,6 @@
 {
   "name": "nuxtend",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "This is Nuxt.js library that provides mixin for asyncData()/fetch() and some helpful features.",
   "main": "src/index.js",
   "scripts": {
