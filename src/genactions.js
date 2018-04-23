@@ -1,5 +1,5 @@
 const pluralize = require('pluralize')
-const {capitalize} = require('./utils')
+const {capitalize, snakeToCamel} = require('./utils')
 
 module.exports = function (context, actionObj) {
   if (!context) {
@@ -29,7 +29,7 @@ module.exports = function (context, actionObj) {
     pathPrefix = action.substr(0, lastSlashPos + 1)
     funcNameBase = action.substr(lastSlashPos + 1)
   }
-  const capitalizedAction = capitalize(funcNameBase)
+  const capitalizedAction = capitalize(snakeToCamel(funcNameBase))
   const pluralizedAction = pluralize.plural(funcNameBase)
   const funcs = {}
 
