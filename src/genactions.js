@@ -49,51 +49,54 @@ module.exports = function (context, actionObj) {
     }
   }
 
-  funcs[`get${capitalizedAction}List`] = function (params) {
+  funcs[`get${capitalizedAction}List`] = function (config) {
     const fullQualifiedActionName = `${pathPrefix}${pluralizedAction}/getList`
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      return this.$store.dispatch(fullQualifiedActionName, params)
+      return this.$store.dispatch(fullQualifiedActionName, config)
     } else {
-      return this.$axios.get(`/${pathPrefix}${pluralizedAction}`, params)
+      return this.$axios.get(`/${pathPrefix}${pluralizedAction}`, config)
     }
   }
 
-  funcs[`post${capitalizedAction}`] = function (arg) {
+  funcs[`post${capitalizedAction}`] = function (arg, config) {
     const fullQualifiedActionName = `${pathPrefix}${pluralizedAction}/create`
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      return this.$store.dispatch(fullQualifiedActionName, arg)
+      const payload = Object.assign({}, arg, {config})
+      return this.$store.dispatch(fullQualifiedActionName, payload)
     } else {
-      return this.$axios.post(`/${pathPrefix}${pluralizedAction}`, arg)
+      return this.$axios.post(`/${pathPrefix}${pluralizedAction}`, arg, config)
     }
   }
 
-  funcs[`put${capitalizedAction}`] = function (arg) {
+  funcs[`put${capitalizedAction}`] = function (arg, config) {
     const fullQualifiedActionName = `${pathPrefix}${pluralizedAction}/update`
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      return this.$store.dispatch(fullQualifiedActionName, arg)
+      const payload = Object.assign({}, arg, {config})
+      return this.$store.dispatch(fullQualifiedActionName, payload)
     } else {
       let id = arg
       let params = null
+      let config = null
       if (typeof arg === 'object') {
         id = arg.id
-        params = arg.params
+        params = arg
       }
-      return this.$axios.put(`/${pathPrefix}${pluralizedAction}/${id}`, {params})
+      return this.$axios.put(`/${pathPrefix}${pluralizedAction}/${id}`, params, config)
     }
   }
 
-  funcs[`delete${capitalizedAction}`] = function (arg) {
+  funcs[`delete${capitalizedAction}`] = function (arg, config) {
     const fullQualifiedActionName = `${pathPrefix}${pluralizedAction}/delete`
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      return this.$store.dispatch(fullQualifiedActionName, arg)
+      const payload = Object.assign({}, arg, {config})
+      return this.$store.dispatch(fullQualifiedActionName, payload)
     } else {
       let id = arg
       let params = null
       if (typeof arg === 'object') {
         id = arg.id
-        params = arg.params
       }
-      return this.$axios.delete(`/${pathPrefix}${pluralizedAction}/${id}`, {params})
+      return this.$axios.delete(`/${pathPrefix}${pluralizedAction}/${id}`, config)
     }
   }
 
