@@ -1,9 +1,10 @@
 {
   "name": "nuxtend",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "This is Nuxt.js library that provides mixin for asyncData()/fetch() and some helpful features.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "babel src --source-maps --out-dir dist",
     "lint": "eslint --ext .js src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
