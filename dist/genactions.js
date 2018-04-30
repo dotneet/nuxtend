@@ -7,6 +7,7 @@ var _typeof3 = _interopRequireDefault(_typeof2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var pluralize = require('pluralize');
+var objectAssign = require('object-assign');
 
 var _require = require('./utils'),
     capitalize = _require.capitalize,
@@ -72,7 +73,7 @@ module.exports = function (context, actionObj) {
   funcs['post' + capitalizedAction] = function (arg, config) {
     var fullQualifiedActionName = '' + pathPrefix + pluralizedAction + '/create';
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      var payload = Object.assign({}, arg, { config: config });
+      var payload = objectAssign({}, arg, { config: config });
       return this.$store.dispatch(fullQualifiedActionName, payload);
     } else {
       return this.$axios.post('/' + pathPrefix + pluralizedAction, arg, config);
@@ -82,7 +83,7 @@ module.exports = function (context, actionObj) {
   funcs['put' + capitalizedAction] = function (arg, config) {
     var fullQualifiedActionName = '' + pathPrefix + pluralizedAction + '/update';
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      var payload = Object.assign({}, arg, { config: config });
+      var payload = objectAssign({}, arg, { config: config });
       return this.$store.dispatch(fullQualifiedActionName, payload);
     } else {
       var id = arg;
@@ -99,7 +100,7 @@ module.exports = function (context, actionObj) {
   funcs['delete' + capitalizedAction] = function (arg, config) {
     var fullQualifiedActionName = '' + pathPrefix + pluralizedAction + '/delete';
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      var payload = Object.assign({}, arg, { config: config });
+      var payload = objectAssign({}, arg, { config: config });
       return this.$store.dispatch(fullQualifiedActionName, payload);
     } else {
       var id = arg;

@@ -1,3 +1,4 @@
+const objectAssign = require('object-assign')
 const genActions = require('./genactions')
 
 function bindContext (methods, context) {
@@ -16,13 +17,13 @@ function createAsyncDataFunction (component, originalAsyncData, methods) {
       let mixin = component.mixins[idx]
       if (typeof mixin.asyncData !== 'undefined') {
         let r = await mixin.asyncData(context)
-        Object.assign(data, r)
+        objectAssign(data, r)
       }
     }
     let target = {}
-    Object.assign(target, bindContext(methods, context))
+    objectAssign(target, bindContext(methods, context))
     let r = await originalAsyncData.apply(target, [context])
-    Object.assign(data, r)
+    objectAssign(data, r)
     return data
   }
 }
@@ -36,7 +37,7 @@ function createFetchFunction (component, originalFetch, methods) {
       }
     }
     let target = {}
-    Object.assign(target, bindContext(methods, context))
+    objectAssign(target, bindContext(methods, context))
     await originalFetch.apply(target, [context])
   }
 }
@@ -46,12 +47,12 @@ function mergeMethods (component) {
   if (component.mixins) {
     component.mixins.forEach(mixin => {
       if (mixin.methods) {
-        Object.assign(methods, mixin.methods)
+        objectAssign(methods, mixin.methods)
       }
     })
   }
   if (component.methods) {
-    Object.assign(methods, component.methods)
+    objectAssign(methods, component.methods)
   }
   if (component.nuxtend && component.nuxtend.actions) {
     for (let act of component.nuxtend.actions) {
@@ -67,7 +68,7 @@ function mergeMethods (component) {
 }
 
 module.exports = function (component) {
-  let com = Object.assign(component)
+  let com = objectAssign(component)
   let {asyncData, fetch} = com
   const methods = mergeMethods(com)
   if (fetch) {

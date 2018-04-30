@@ -1,4 +1,5 @@
 const pluralize = require('pluralize')
+const objectAssign = require('object-assign')
 const {capitalize, snakeToCamel} = require('./utils')
 
 module.exports = function (context, actionObj) {
@@ -61,7 +62,7 @@ module.exports = function (context, actionObj) {
   funcs[`post${capitalizedAction}`] = function (arg, config) {
     const fullQualifiedActionName = `${pathPrefix}${pluralizedAction}/create`
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      const payload = Object.assign({}, arg, {config})
+      const payload = objectAssign({}, arg, {config})
       return this.$store.dispatch(fullQualifiedActionName, payload)
     } else {
       return this.$axios.post(`/${pathPrefix}${pluralizedAction}`, arg, config)
@@ -71,7 +72,7 @@ module.exports = function (context, actionObj) {
   funcs[`put${capitalizedAction}`] = function (arg, config) {
     const fullQualifiedActionName = `${pathPrefix}${pluralizedAction}/update`
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      const payload = Object.assign({}, arg, {config})
+      const payload = objectAssign({}, arg, {config})
       return this.$store.dispatch(fullQualifiedActionName, payload)
     } else {
       let id = arg
@@ -88,7 +89,7 @@ module.exports = function (context, actionObj) {
   funcs[`delete${capitalizedAction}`] = function (arg, config) {
     const fullQualifiedActionName = `${pathPrefix}${pluralizedAction}/delete`
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      const payload = Object.assign({}, arg, {config})
+      const payload = objectAssign({}, arg, {config})
       return this.$store.dispatch(fullQualifiedActionName, payload)
     } else {
       let id = arg

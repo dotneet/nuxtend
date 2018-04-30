@@ -6,6 +6,7 @@ var _regenerator2 = _interopRequireDefault(_regenerator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var objectAssign = require('object-assign');
 var genActions = require('./genactions');
 
 function bindContext(methods, context) {
@@ -50,7 +51,7 @@ function createAsyncDataFunction(component, originalAsyncData, methods) {
           case 8:
             _r = _context.sent;
 
-            Object.assign(data, _r);
+            objectAssign(data, _r);
 
           case 10:
             _context.next = 2;
@@ -59,14 +60,14 @@ function createAsyncDataFunction(component, originalAsyncData, methods) {
           case 12:
             target = {};
 
-            Object.assign(target, bindContext(methods, context));
+            objectAssign(target, bindContext(methods, context));
             _context.next = 16;
             return _regenerator2.default.awrap(originalAsyncData.apply(target, [context]));
 
           case 16:
             r = _context.sent;
 
-            Object.assign(data, r);
+            objectAssign(data, r);
             return _context.abrupt('return', data);
 
           case 19:
@@ -113,7 +114,7 @@ function createFetchFunction(component, originalFetch, methods) {
           case 9:
             target = {};
 
-            Object.assign(target, bindContext(methods, context));
+            objectAssign(target, bindContext(methods, context));
             _context2.next = 13;
             return _regenerator2.default.awrap(originalFetch.apply(target, [context]));
 
@@ -131,12 +132,12 @@ function mergeMethods(component) {
   if (component.mixins) {
     component.mixins.forEach(function (mixin) {
       if (mixin.methods) {
-        Object.assign(methods, mixin.methods);
+        objectAssign(methods, mixin.methods);
       }
     });
   }
   if (component.methods) {
-    Object.assign(methods, component.methods);
+    objectAssign(methods, component.methods);
   }
   if (component.nuxtend && component.nuxtend.actions) {
     var _iteratorNormalCompletion = true;
@@ -173,7 +174,7 @@ function mergeMethods(component) {
 }
 
 module.exports = function (component) {
-  var com = Object.assign(component);
+  var com = objectAssign(component);
   var asyncData = com.asyncData,
       fetch = com.fetch;
 
