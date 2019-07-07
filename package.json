@@ -34,6 +34,6 @@
   },
   "dependencies": {
     "object-assign": "^4.1.1",
-    "pluralize": "^7.0.0"
+    "pluralize": "^8.0.0"
   }
 }
