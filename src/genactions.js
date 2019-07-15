@@ -1,29 +1,25 @@
 const pluralize = require('pluralize')
 const objectAssign = require('object-assign')
-const {capitalize, snakeToCamel} = require('./utils')
+const { capitalize, snakeToCamel } = require('./utils')
 
 module.exports = function (context, actionObj) {
   if (!context) {
     console.warn('[nuxtend] genactions: conext is not passed.')
     return {}
   }
-  let action = '' 
-  let alias = null
+  let action = ''
   let funcNameBase = ''
   if (typeof actionObj === 'string') {
     action = actionObj
   } else {
     action = actionObj.name
-    if (actionObj.alias) {
-      alias = actionObj.alias
-    }
   }
   if (!action) {
     console.warn('[nuxtend] genactions: action is not passed.')
     return {}
   }
   let pathPrefix = ''
-  let lastSlashPos = action.lastIndexOf('/')
+  const lastSlashPos = action.lastIndexOf('/')
   if (lastSlashPos === -1) {
     funcNameBase = action
   } else {
@@ -46,7 +42,7 @@ module.exports = function (context, actionObj) {
         id = arg.id
         params = arg.params
       }
-      return this.$axios.get(`/${pathPrefix}${pluralizedAction}/${id}`, {params})
+      return this.$axios.get(`/${pathPrefix}${pluralizedAction}/${id}`, { params })
     }
   }
 
@@ -62,7 +58,7 @@ module.exports = function (context, actionObj) {
   funcs[`post${capitalizedAction}`] = function (arg, config) {
     const fullQualifiedActionName = `${pathPrefix}${pluralizedAction}/create`
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      const payload = objectAssign({}, arg, {config})
+      const payload = objectAssign({}, arg, { config })
       return this.$store.dispatch(fullQualifiedActionName, payload)
     } else {
       return this.$axios.post(`/${pathPrefix}${pluralizedAction}`, arg, config)
@@ -72,12 +68,12 @@ module.exports = function (context, actionObj) {
   funcs[`put${capitalizedAction}`] = function (arg, config) {
     const fullQualifiedActionName = `${pathPrefix}${pluralizedAction}/update`
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      const payload = objectAssign({}, arg, {config})
+      const payload = objectAssign({}, arg, { config })
       return this.$store.dispatch(fullQualifiedActionName, payload)
     } else {
       let id = arg
       let params = null
-      let config = null
+      const config = null
       if (typeof arg === 'object') {
         id = arg.id
         params = arg
@@ -89,11 +85,10 @@ module.exports = function (context, actionObj) {
   funcs[`delete${capitalizedAction}`] = function (arg, config) {
     const fullQualifiedActionName = `${pathPrefix}${pluralizedAction}/delete`
     if (typeof this.$store._actions[fullQualifiedActionName] !== 'undefined') {
-      const payload = objectAssign({}, arg, {config})
+      const payload = objectAssign({}, arg, { config })
       return this.$store.dispatch(fullQualifiedActionName, payload)
     } else {
       let id = arg
-      let params = null
       if (typeof arg === 'object') {
         id = arg.id
       }
